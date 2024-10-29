@@ -1,0 +1,2297 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Project One #</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Project_Report_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Project_Report_files/libs/quarto-html/quarto.js"></script>
+<script src="Project_Report_files/libs/quarto-html/popper.min.js"></script>
+<script src="Project_Report_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Project_Report_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Project_Report_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Project_Report_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Project_Report_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Project_Report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Project_Report_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Project One #</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="cell-2" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="question-1" class="level2">
+<h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
+<p>Run the model in the default configuration we have used in class. We will call this the control trajectory of the model. For a variety of points along the control trajectory, compute the propagator matrix (<strong>M</strong>) for a 1.0 time unit forecast (hereafter denoted <span class="math inline">\(t_f\)</span> ) using the code provided. At each of these points, use the propagator matrix to predict the forecast error via the Euclidean norm for different sized isotropic initial condition errors (i.e., change the magnitude of the error in variable ic_error)). Next, compute the forecast error with the non-linear model by adding the isotropic error to the control trajectory and integrating the nonlinear model forward. How does the linear prediction of the forecast error compare to the actual error? Are there locations within the state space volume where the linear model errors disagree with the nonlinear model? What does that say about the Lorenz 63 model at these points?</p>
+<hr>
+<p>We want to look at a variety of points along the true trajectory of the Lorenz model which spans 20,000 steps, and we maintain the 1.0 time unit forecast, corresponding to 500 steps. I chose to look at windows every 250 steps along the trajectory (e.g.&nbsp;<code>[0-500],[250-750],...,[19500-20000]</code>). For each window, the control trajectory is already established, a forecast error is found by stepping through numerically with an initial perturbation <code>ic_error</code>, and a linear prediction of the error is constructed using a tangent linear matrix. These following error calculations are represented visually below. The analysis looked at windows every 250 steps with isotropic errors between 0.0 and 1.0 inclusive (i.e.&nbsp;0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0).</p>
+<div id="cell-5" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">"./Images_Project_1/q1_Heatmaps.png"</span>, width<span class="op">=</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img" width="1000"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These figures show the relationship between different perturbations (i.e.&nbsp;different values of isotropic error) and the initial step of the forecast window. The first two plots show the absolute propogated forecast error and the predicted linear model of error. A couple of observations: * Generally, the linear model of error seems to overpredict the error in a few key intervals compared to the forecasted error. They do share the intervals with the highest levels of error, but the linear model emphasizes the error much more. * The linear model misses some nuance in the forecasted error. For example, the window from step 11750 to 12250 exhibits some unexpected behavior where there is significantly higher forecast error with isotropic error of 0.2 and 0.3 compared to higher levels of isotropic error. This is likely due to the unpredictable nature of perturbations; the model will respond in different ways at different points along the trajectory. However, the linear model of error completely misses this anomaly, and it exhibits standard error increasing with isotropic error for the <code>[11750,12250]</code> window.</p>
+<p>In the bottom figures, we can see the difference between the forecast error and the linear model error explicitly represented. The windows where the linear model overpredicts the error stand out as the largest differences between the two approaches. The secondary graph normalizes some of more extreme magnitudes, so we can visually see these windows more clearly. There appears to be more frequency in difference between the errors for later windows in the trajectory, but the windows of largest difference are somewhat sporadically distributed. We can draw out these specific intervals by looking at the mean difference in error for an entire window (averaging across the results for all isotropic error values). The following table presents the 10 largest mean differences in error.</p>
+<div id="cell-7" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">"./Images_Project_1/q1_table_top10.png"</span>, width<span class="op">=</span><span class="dv">1100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img" width="1100"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These windows (<code>[initial_step, initial_step+500]</code>) likely correspond to highly non-linear regions within the model trajectory, as the TLM tries to predict the forecast error, it might significantly overpredict or underpredict error because of the unpredictable nature of the models in these windows. We are likely not seeing a full picture of these highly non-linear windows because of the coarse step interval of 250. However, we can first look at where these steps fall in the space.</p>
+<div id="cell-9" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">"./Images_Project_1/q1_lorenz3d_step250_top10_double.png"</span>, width<span class="op">=</span><span class="dv">850</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img" width="850"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The red dots mark the initial steps for these 10 windows of largest mean error difference (darker dots have a larger mean difference). Then we can see the actual windows/trajectories these initial steps represent on the right plot. It appears that nearly of these trajectories pass through center between the lobes where the trajectory is switching between attractors. This makes sense as a highly non-linear region, and the general dispersion of these initial steps could likely be due to the nature of the system and coarseness of our 250 step intervals.</p>
+<p>We can test this idea by simply increasing the frequency of our initial steps. If we try an interval of 25 steps between windows, we will have 800 total windows accessing many more distinct parts of the trajectories.</p>
+<div id="cell-11" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">"./Images_Project_1/q1_lorenz3d_step25_double.png"</span>, width<span class="op">=</span><span class="dv">850</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img" width="850"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These graphs show the 100 intervals with the largest difference in error. They are distributed more evenly throughout the trajectory, but we can still see that the full trajectories they describe seem to be switching between the attractors. We can check the range of the mean difference for these 100 windows below, and we see that it looks very similar to the 10 largest error windows for the 250 step intervals. This suggests that 250 steps accurately represented the non-linearity of the system.</p>
+<div id="cell-13" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">"./Images_Project_1/q1_table_top100.png"</span>, width <span class="op">=</span> <span class="dv">1100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img" width="1100"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can finally look at the average error along the different isotropic error values. This will give us an idea of how the forecast error and non-linear behavior increases with greater perturbations. The following table and figure summarize these results. There is a relatively stable relationship between increasing the perturbation from an isotropic error and the cumlative addition to the discrepancy between forecast error and the linear model of forecast error. This is a reasonable correlation between increasing initial isotropic error and the resultant linear model performance, but it is surprising that the error does not grow more exponentially (even with larger perturbations up to 10.0). This could mean that error in initial conditions will grow exponentially, but the discrepancy between a linear model prediction and the actual propogated error might grow more linearly.</p>
+<div id="cell-15" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">"./Images_Project_1/q1_table_isotropic_mean.png"</span>, width <span class="op">=</span> <span class="dv">1100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img" width="1100"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-16" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'./Images_Project_1/q1_mean_perturbation.png'</span>, width <span class="op">=</span> <span class="dv">800</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img" width="800"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="summary-for-question-1" class="level4">
+<h4 class="anchored" data-anchor-id="summary-for-question-1"><strong>Summary for Question 1</strong></h4>
+<p>The linear models accurately approximated the forecast error for the Lorenz 63 model for the majority of the 500 step windows along the trajectory. It performed very well in most of space, including model runs with much higher initial perturbations, but there were a collection of windows along the trajectory where the discrepancy between the linear model’s prediciton and the propogated model error became very large; this discrepancy also tended to grow with increased initial condition error.</p>
+<p>These regions and windows are documented above; they generally indicate highly non-linear sections of the trajectory because the tangent linear model has a difficult time accurately representing the behavior of these sections. When we looked at the initial steps and intervals for these sections, there was a clear correlation that the most non-linear sections tended to pass through “center” of the two lobes where the state of the Lorenz 63 model is rapidly switching between the attractors of the system.</p>
+</section>
+</section>
+<section id="question-2" class="level2">
+<h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
+<p>Repeat the above calculations from (1), but change the amount of time used to compute the propagator matrix (i.e., decrease and increase <span class="math inline">\(t_f\)</span> with variable fcst_len). How does this change your results from above?</p>
+<hr>
+<p>We can use the same process as question 1 with an added layer of iteration to vary the forecast length. For this question, an interval of 250 steps between windows will be used again, as the results in question 1 showed this spatial frequency is informative – even if it misses some granularity.</p>
+<section id="expectations" class="level3">
+<h3 class="anchored" data-anchor-id="expectations">Expectations</h3>
+<p>We might expect the error difference in the models to increase consistently with the size of the forecast length because linearizing over longer intervals will both lose a lot of information to the process and increase the likelihood of encountering a highly non-linear regime in the window. For example, a forecast length of 5.0 includes 2500 steps, which is bound to encompass multiple oscillations between the strange attractors and many highly non-linear windows.</p>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<p>Using a range of fcst lengths, [0.1, 0.2, 0.3, 0.4, 0.5, 0.75, 1.0, 2.5, 5.0, 10.0], we can look at the effect on the discrepancy in propogated forecast error and modeled linear error. <strong>Note: the following heat maps are not scaled to each other, the magnitude of the error difference varies greatly between plots. There are mutually scaled plots that follow.</strong></p>
+<div id="cell-25" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'./Images_Project_1/q2_Heatmaps.png'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Keeping in mind that the scales for each of these heatmaps are very different, these graphs give us an initial idea of how the discrepancy between the forecast and the linear model vary across the space. We can see behavior similar to the original case of a 1.0 time unit forecast length (500 steps/window) across nearly all of the lengths. The intervals of non-linearity seem to vary from case to case, and there are some interesting results when comparing similar forecast lengths.</p>
+<p>Using a forecast length of 0.5 (250 steps/window), we see fairly consistent agreement between the forecast and the linear model, until a window between 18000 and 19000 steps where there is a massive spike in the discrepancy between the models. Even more curiously, the larger forecast length of 0.75 units (375 steps/window) exhibits significantly lower magnitudes of maximum variance between the two approaches. This is likely indiciative of the chaotic and non-linear nature of the model, by skipping an extra 125 steps in the calculation of the TLM or by starting at a different initial step, the larger forecast length of 0.75 smooths out some of the extreme non-linearity drawn out by the forecast length of 0.5. The 0.75 forecast length linear model does disagree across more of the space, more sporadically than the 0.5 forecast length linear model once again reinforcing this unpredicatable nature.</p>
+<section id="forecast-length-of-0.1-and-noise" class="level4">
+<h4 class="anchored" data-anchor-id="forecast-length-of-0.1-and-noise">Forecast Length of 0.1 and Noise</h4>
+<p>The forecast length of 0.1 produces some amazing results. There appears to be very consistent, yet unpatterned, disagreement across nearly the entire space. The magnitude does generally increase with initial condition error, which follows expectations, but we see a very unusual blanket of disagreement across the entire trajectory. We can likely attribute this interesting behavior to the potential “noisiness” and fractal structure of the model. Even though the trajectories appear to be extremely close to one another and very consistent in their general shape, a tiny nudge along any point in the trajectory can cause very divergent trajectories. On a very small scale of linearization, this might result in the TLM shooting off in a random direction before the model returns to a slightly more “traditional” trajectory.</p>
+<p>An additional factor might be the noisiness of the trajectory. Especially in the real world, a chaotic system is undergoing many miniscule variations and fluctuations, and shrinking down the window to linearize over eventually stops smoothing out this noise, and the noise begins to influence the linear model, dominating over the larger trend in the trajectory.</p>
+</section>
+</section>
+<section id="consistent-scaling-for-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="consistent-scaling-for-visualization">Consistent Scaling for Visualization</h3>
+<p>It can also be very helpful to look at constant scales for these plots to get an idea of how the discrepancy between models compares across forecast lengths (rather than the trajectory). The following plots do that with a logarithmic color scale.</p>
+<div id="cell-27" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'./Images_Project_1/q2_Normalize_Heatmaps.png'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can see the lower forecast lengths exhibit very little discrepancy between the forecast and linear model, but we quickly see the nature of exponential error growth in chaotic systems. The difference between the forecast and linear model begins to grow incredibly quickly, and the error grows extremely rapidly and is very signficant, especially in the models that use a length of 5.0 and 10.0. The visual results are very interesting, but we definitely need to dig into the quantitative analysis to gain a deeper understanding.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 66%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Forecast Length</th>
+<th style="text-align: left;">Mean Difference Between Forecast and Linear Model</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0.1</td>
+<td style="text-align: left;">0.00827501</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0.2</td>
+<td style="text-align: left;">0.04012</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0.3</td>
+<td style="text-align: left;">0.175114</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0.4</td>
+<td style="text-align: left;">0.579343</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;">0.932126</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;">1.08677</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">2.26178</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2.5</td>
+<td style="text-align: left;">10.9751</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">155.484</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">18377.8</td>
+</tr>
+</tbody>
+</table>
+<p>Here we can explicitly see this extremely rapid growth in error projection when we increase the forecast length. There seems to be a direct and signficant correlation between an increase in forecast length and an exponential-order increase in the error of the linear model projection.</p>
+</section>
+</section>
+<section id="question-3" class="level2">
+<h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
+<p>Linear time-independent propagators can have a limited usefulness for a nonlinear model. For this step, compute the tangent linear model by changing the frequency over which the propagator matrix M is computed, which in turn will change the accuracy of the tangent linear approximation, by adjusting tl_freq. Note that a value of 1 means computing the tangent linear model every timestep, a value of 10 means compute it every 10 timesteps. Repeat the process you used in (1), but where you hold the initial condition error at 0.1 units. Compare the difference between the linear and non-linear error when you compute the tangent linear model every 1, 2, 5, and 10 timesteps. How does your answer vary depending on location along the state space?</p>
+<hr>
+<p>We computed the TLM over varying frequencies and time steps, to find the following results:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>TLM_Freq_Range</th>
+<th>1</th>
+<th>2</th>
+<th>5</th>
+<th>10</th>
+<th>Mean_Difference_Step</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Initial_Step</td>
+<td>0.012195</td>
+<td>0.001714</td>
+<td>0.057740</td>
+<td>2.224436</td>
+<td>0.574021</td>
+</tr>
+<tr class="even">
+<td>250</td>
+<td>0.000730</td>
+<td>0.003112</td>
+<td>0.012237</td>
+<td>0.071005</td>
+<td>0.021771</td>
+</tr>
+<tr class="odd">
+<td>500</td>
+<td>0.000153</td>
+<td>0.018783</td>
+<td>0.084564</td>
+<td>0.232829</td>
+<td>0.084082</td>
+</tr>
+<tr class="even">
+<td>750</td>
+<td>0.000323</td>
+<td>0.020895</td>
+<td>0.096439</td>
+<td>0.268085</td>
+<td>0.096435</td>
+</tr>
+<tr class="odd">
+<td>1000</td>
+<td>0.000623</td>
+<td>0.022044</td>
+<td>0.102818</td>
+<td>0.287422</td>
+<td>0.103227</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>18250</td>
+<td>0.124073</td>
+<td>0.181033</td>
+<td>0.424563</td>
+<td>1.842241</td>
+<td>0.642977</td>
+</tr>
+<tr class="even">
+<td>18500</td>
+<td>0.001102</td>
+<td>0.013498</td>
+<td>0.072943</td>
+<td>0.257886</td>
+<td>0.086357</td>
+</tr>
+<tr class="odd">
+<td>18750</td>
+<td>0.002996</td>
+<td>0.019853</td>
+<td>0.103808</td>
+<td>0.300333</td>
+<td>0.106747</td>
+</tr>
+<tr class="even">
+<td>19000</td>
+<td>0.028476</td>
+<td>0.054601</td>
+<td>0.297112</td>
+<td>0.597913</td>
+<td>0.244526</td>
+</tr>
+<tr class="odd">
+<td>19250</td>
+<td>0.004529</td>
+<td>0.018779</td>
+<td>0.074558</td>
+<td>0.100406</td>
+<td>0.049568</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>TLM_Freq_Range</th>
+<th>Mean for Frequency of TLM Calculation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0.145765</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0.174193</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>0.319334</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>0.905715</td>
+</tr>
+</tbody>
+</table>
+<div id="cell-36" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Image(<span class="st">'./Images_Project_1/q3_Variation in space.png'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the above tables and figures, we can find that the decrease in frequency of calculation (associated with a larger tl_freq meaning the calculation takes place after a greater number of steps). We see that the discrepancy between the forecast and the linear model increases fairly consistently with the greater number of steps used to calculate the TLM.</p>
+<p>We see extremely similar non-linear behavior as the base case in question 1, as the TLM calculation still tends to suffer in these regimes of non-linear behavior. However, we do find some areas with unusual behavior. Speicially, we can see that the mean discrepancy for the period of 5 steps is greater than the periods of 1 and 2 steps, however, this diasgreement is spread much more evenly across the entire space. This might indicate that the period of 5 steps for the calculation manages to smooth and avoid some of the highly non-linear regions, probably by chance, although it would be very interesting to explore any patterns in periodicity and reduced discrepancy that might correspond with jumping past highly non-linear regions.</p>
+<p>Evidently, it appears to be very advantageous to calculate the TLM as frequently as possible, although a period that is too small might result in an amplification of noise and non-linearity because the linear model is being recalculated so frequently.</p>
+</section>
+<section id="question-4" class="level2">
+<h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
+<p>We are now going to look at the growth of initial condition errors in this model using singular vectors. At several points along the model trajectory, compute the propagator matrix for a 1.0 time unit forecast, then compute the singular vectors, which are obtained by taking the eigenvalue decomposition of M T M. Plot the evolution of the first and second singular vector in the x-z space at various points along the trajectory (you can plot the evolution of singular vectors by setting plot_sv = True, and you can switch between the first and second singular vectors by changing sing_val from 1 to 2). How does the orientation of the first and second singular vector change for different locations in the model trajectory? What is the orientation of the first and second singular vectors relative to each other for different points along the model trajectory? Explore the distribution of singular values along the state space trajectory. What locations are characterized by the largest values? What do these large values mean about the Lorenz 63 model?</p>
+<hr>
+<p>The singular vectors are always orthogonal to each other, but their orientation relative to the trajectory at each point varies significantly. It does visually appear that the singular vectors maintain a very consistent orientation relative to the trajectory at each point (e.g.&nbsp;if the first singular vector begins orthogonal to the trajectory at an initial point, it appears to maintain that orthogonality through the trajectory window).</p>
+<p>When once of the vectors (specifically the dominant first singular vector) aligns with the trajectory, this indicates that any perturbation along that axis will just to continue to enforce the current trajectory. When the vectors are orthogonal to the trajectory a perturbation along that direction will significantly change the trajectory.</p>
+<p>To see how the singular values vary across the space by looking at their magnitude along different points in the trajectory.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-41-1-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<p>We can see a clear dichotomy where the first singular values are always greater than or similar in magnitude to the secondary singular values. This makes sense, as the first singular values are expected to dominate the “error space” they describe. Similarly to question 1, where we found a few specific windows that exhibited high magnitudes of potential error (from the same perturbation), we see a small number of intervals that are outliers in the large magnitude of their predicted error.</p>
+<p>It might be informative to compare the largest intervals of error between the SVD analysis and the TLM analysis from question 1. The table below draws out the 10 intervals with the largest magnitude of predicted error from the SVD method, the 10 intervals with the largest discrepancy in error, and the ten intervals with the largest propogated error (actually stepping the isorptoic error through the Lorenz model).</p>
+<p><strong>Initial Step for a 500 step Interval</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 30%">
+<col style="width: 25%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Singular Value</th>
+<th>TLM Prediciton</th>
+<th>Propagated Forecast Error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>7250</td>
+<td>7250</td>
+<td>7250</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>8500</td>
+<td>11750</td>
+<td>11750</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>11750</td>
+<td>16500</td>
+<td>16500</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>13250</td>
+<td>14500</td>
+<td>15500</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>14250</td>
+<td>16750</td>
+<td>16750</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>15250</td>
+<td>15500</td>
+<td>14500</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>15500</td>
+<td>14250</td>
+<td>7500</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>16500</td>
+<td>18000</td>
+<td>18000</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>17500</td>
+<td>7500</td>
+<td>14250</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>18000</td>
+<td>11000</td>
+<td>15250</td>
+</tr>
+</tbody>
+</table>
+<p>We would expect these ten regions to describe the most non-linear and volatile windows of the Lorenz model, and we can see some interesting shared results between them. * The Tangent Linear Model prediction shares 9 of the 10 top intervals with the true propogated error, with the first three intervals also sharing the same rank/ordering. * The Singular Value Decomposition analysis shares many of the same results, including the largest magnitude of error from the interval 7250 steps to 7750 steps. They share 7 of the 10 total intervals.</p>
+<p>It is very interesting and helpful that the SVD analysis can tell us information about these highly non-linear regions, but their chief purpose is to describe the greatest possible error growth and final space that the error might occupy as we step the singular vectors through the system.</p>
+<p>The graphs for all 80 windows (250 steps intervals for 500 step windows) are shown below, with the first singular vectors in the first graph, the sceond singular vectors in the second graph, and the forecast trajectory (exhibiting a slight perturbation) in the last graph. One of the most interesting visual results that I would like to explor more, is how the actual orientation and the result of their superposition might relate to the final relative position of the forecast trajectory. It appears that a superposition of the singular vectors might tell us with some degree of accuracy where a model with isotropic error might end up after a certain window. This is an amazing result because it means you could use a single set of propogated singular vectors to approximate the final state of a variety of initial perturbations. This result also makes sense mathematically, as an isotropic error (equal in all directions) would grow the most along the singular vectors, resulting in a final error that can be very well approximated by these vectors. Another interesting challenge might be to adapt and calibrate singular vector results to work with non-uniform/non-isotropic error.</p>
+<section id="appendix-all-singular-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="appendix-all-singular-vectors">Appendix: All Singular Vectors</h3>
+<div id="cell-46" class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.figsize"</span>] <span class="op">=</span> [<span class="fl">18.0</span>, <span class="dv">10</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sing_val <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, M <span class="kw">in</span> <span class="bu">enumerate</span>(TLM_storage):</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    (xtrue, ytrue, ztrue), (xfcst, yfcst, zfcst) <span class="op">=</span> xyztruths[index], xyzfcsts[index]</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    u, s, vt <span class="op">=</span> np.linalg.svd(M, full_matrices<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    ic_sing <span class="op">=</span> np.array(vt[sing_val <span class="op">-</span> <span class="dv">1</span>, :])</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    ic_sing[:] <span class="op">=</span> ic_sing[:] <span class="op">/</span> np.sqrt(np.<span class="bu">sum</span>(ic_sing[:] <span class="op">**</span> <span class="dv">2</span>)) <span class="op">*</span> np.sqrt(np.<span class="bu">sum</span>(ic_error[:] <span class="op">**</span> <span class="dv">2</span>)) <span class="co">## Normalize singular vectors</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    ic_sing_2 <span class="op">=</span> np.array(vt[sing_val, :])</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    ic_sing_2[:] <span class="op">=</span> ic_sing_2[:] <span class="op">/</span> np.sqrt(np.<span class="bu">sum</span>(ic_sing_2[:] <span class="op">**</span> <span class="dv">2</span>)) <span class="op">*</span> np.sqrt(np.<span class="bu">sum</span>(ic_error[:] <span class="op">**</span> <span class="dv">2</span>)) <span class="co">## Normalize singular vectors</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    xsing <span class="op">=</span> np.empty(fcst_steps <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    ysing <span class="op">=</span> np.empty(fcst_steps <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    zsing <span class="op">=</span> np.empty(fcst_steps <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    xsing[<span class="dv">0</span>], ysing[<span class="dv">0</span>], zsing[<span class="dv">0</span>] <span class="op">=</span> (xtrue[<span class="dv">0</span>] <span class="op">+</span> ic_sing[<span class="dv">0</span>], ytrue[<span class="dv">0</span>] <span class="op">+</span> ic_sing[<span class="dv">1</span>], ztrue[<span class="dv">0</span>] <span class="op">+</span> ic_sing[<span class="dv">2</span>])</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    xsing_2 <span class="op">=</span> np.empty(fcst_steps <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    ysing_2 <span class="op">=</span> np.empty(fcst_steps <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    zsing_2 <span class="op">=</span> np.empty(fcst_steps <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    xsing_2[<span class="dv">0</span>], ysing_2[<span class="dv">0</span>], zsing_2[<span class="dv">0</span>] <span class="op">=</span> (xtrue[<span class="dv">0</span>] <span class="op">+</span> ic_sing_2[<span class="dv">0</span>], ytrue[<span class="dv">0</span>] <span class="op">+</span> ic_sing_2[<span class="dv">1</span>], ztrue[<span class="dv">0</span>] <span class="op">+</span> ic_sing_2[<span class="dv">2</span>])</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(fcst_steps):</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>        x_dot, y_dot, z_dot <span class="op">=</span> lorenz(xsing[i], ysing[i], zsing[i])</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        xsing[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> xsing[i] <span class="op">+</span> (x_dot <span class="op">*</span> dt)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>        ysing[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> ysing[i] <span class="op">+</span> (y_dot <span class="op">*</span> dt)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>        zsing[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> zsing[i] <span class="op">+</span> (z_dot <span class="op">*</span> dt)</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>        x_dot, y_dot, z_dot <span class="op">=</span> lorenz(xsing_2[i], ysing_2[i], zsing_2[i])</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>        xsing_2[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> xsing_2[i] <span class="op">+</span> (x_dot <span class="op">*</span> dt)</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>        ysing_2[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> ysing_2[i] <span class="op">+</span> (y_dot <span class="op">*</span> dt)</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>        zsing_2[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> zsing_2[i] <span class="op">+</span> (z_dot <span class="op">*</span> dt)</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"INITIAL STEP: </span><span class="sc">{</span>initial_steps[index]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"First and Second Singular Values: (</span><span class="sc">{</span>s[sing_val <span class="op">-</span> <span class="dv">1</span>]<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>s[sing_val]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Error from forecast with First SV initial condition error: "</span>,</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>          euclid_norm(xsing[<span class="op">-</span><span class="dv">1</span>], ysing[<span class="op">-</span><span class="dv">1</span>], zsing[<span class="op">-</span><span class="dv">1</span>], xtrue[<span class="op">-</span><span class="dv">1</span>], ytrue[<span class="op">-</span><span class="dv">1</span>], ztrue[<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Error from forecast with Second SV initial condition error: "</span>,</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>          euclid_norm(xsing_2[<span class="op">-</span><span class="dv">1</span>], ysing_2[<span class="op">-</span><span class="dv">1</span>], zsing_2[<span class="op">-</span><span class="dv">1</span>], xtrue[<span class="op">-</span><span class="dv">1</span>], ytrue[<span class="op">-</span><span class="dv">1</span>], ztrue[<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Predicted Error from TLM: "</span>, TLM_error[index])</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Propogated Forecast Error: "</span>, fcst_error[index])</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>    fig, (ax1,ax2,ax3) <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">3</span>)</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Establish base trajectory</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>    ax1.plot(xtraj, ztraj, lw<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'lightgray'</span>)</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>    ax1.plot(xtrue, ztrue, <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>    ax1.plot(xtrue[<span class="dv">0</span>], ztrue[<span class="dv">0</span>], <span class="st">'o'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>    ax1.plot(xtrue[<span class="op">-</span><span class="dv">1</span>], ztrue[<span class="op">-</span><span class="dv">1</span>], <span class="st">'^'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>    ax2.plot(xtraj, ztraj, lw<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'lightgray'</span>)</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>    ax2.plot(xtrue, ztrue, <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>    ax2.plot(xtrue[<span class="dv">0</span>], ztrue[<span class="dv">0</span>], <span class="st">'o'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>    ax2.plot(xtrue[<span class="op">-</span><span class="dv">1</span>], ztrue[<span class="op">-</span><span class="dv">1</span>], <span class="st">'^'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>    ax3.plot(xtraj, ztraj, lw<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'lightgray'</span>)</span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>    ax3.plot(xtrue, ztrue, <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>    ax3.plot(xtrue[<span class="dv">0</span>], ztrue[<span class="dv">0</span>], <span class="st">'o'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>    ax3.plot(xtrue[<span class="op">-</span><span class="dv">1</span>], ztrue[<span class="op">-</span><span class="dv">1</span>], <span class="st">'^'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plot_nlfcst=True</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (plot_nlfcst):</span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>        ax1.plot(xfcst, zfcst, <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>        ax1.plot(xfcst[<span class="dv">0</span>], zfcst[<span class="dv">0</span>], <span class="st">'o'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>        ax1.plot(xfcst[<span class="op">-</span><span class="dv">1</span>], zfcst[<span class="op">-</span><span class="dv">1</span>], <span class="st">'^'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a>        ax2.plot(xfcst, zfcst, <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>        ax2.plot(xfcst[<span class="dv">0</span>], zfcst[<span class="dv">0</span>], <span class="st">'o'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a>        ax2.plot(xfcst[<span class="op">-</span><span class="dv">1</span>], zfcst[<span class="op">-</span><span class="dv">1</span>], <span class="st">'^'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>    <span class="co">## Plot Forecast Third Plot</span></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a>    ax3.plot(xfcst, zfcst, <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>    ax3.plot(xfcst[<span class="dv">0</span>], zfcst[<span class="dv">0</span>], <span class="st">'o'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>    ax3.plot(xfcst[<span class="op">-</span><span class="dv">1</span>], zfcst[<span class="op">-</span><span class="dv">1</span>], <span class="st">'^'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>    xmin <span class="op">=</span> np.<span class="bu">min</span>([np.<span class="bu">min</span>(xtrue), np.<span class="bu">min</span>(xfcst)])</span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>    xmax <span class="op">=</span> np.<span class="bu">max</span>([np.<span class="bu">max</span>(xtrue), np.<span class="bu">max</span>(xfcst)])</span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>    zmin <span class="op">=</span> np.<span class="bu">min</span>([np.<span class="bu">min</span>(ztrue), np.<span class="bu">min</span>(zfcst)])</span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>    zmax <span class="op">=</span> np.<span class="bu">max</span>([np.<span class="bu">max</span>(ztrue), np.<span class="bu">max</span>(zfcst)])</span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (plot_sv):</span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a>        ax1.plot([xtrue[<span class="dv">0</span>], xsing[<span class="dv">0</span>]], [ztrue[<span class="dv">0</span>], zsing[<span class="dv">0</span>]], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a>        ax1.plot([xtrue[<span class="op">-</span><span class="dv">1</span>], xsing[<span class="op">-</span><span class="dv">1</span>]], [ztrue[<span class="op">-</span><span class="dv">1</span>], zsing[<span class="op">-</span><span class="dv">1</span>]], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(xsing), sv_plot_freq):</span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a>            ax1.plot([xtrue[i], xsing[i]], [ztrue[i], zsing[i]], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a>        ax2.plot([xtrue[<span class="dv">0</span>], xsing_2[<span class="dv">0</span>]], [ztrue[<span class="dv">0</span>], zsing_2[<span class="dv">0</span>]], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a>        ax2.plot([xtrue[<span class="op">-</span><span class="dv">1</span>], xsing_2[<span class="op">-</span><span class="dv">1</span>]], [ztrue[<span class="op">-</span><span class="dv">1</span>], zsing_2[<span class="op">-</span><span class="dv">1</span>]], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(xsing), sv_plot_freq):</span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a>            ax2.plot([xtrue[i], xsing_2[i]], [ztrue[i], zsing_2[i]], <span class="st">'-'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a>    ax1.axis([xmin <span class="op">-</span> (xmax <span class="op">-</span> xmin) <span class="op">*</span> <span class="fl">0.08</span>, xmax <span class="op">+</span> (xmax <span class="op">-</span> xmin) <span class="op">*</span> <span class="fl">0.08</span>, zmin <span class="op">-</span> (zmax <span class="op">-</span> zmin) <span class="op">*</span> <span class="fl">0.08</span>,</span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a>              zmax <span class="op">+</span> (zmax <span class="op">-</span> zmin) <span class="op">*</span> <span class="fl">0.08</span>])</span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a>    ax1.set_xlabel(<span class="st">'x'</span>)</span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a>    ax1.set_ylabel(<span class="st">'z'</span>)</span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="ss">f"First Singular Vectors"</span>)</span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a>    ax2.axis([xmin <span class="op">-</span> (xmax <span class="op">-</span> xmin) <span class="op">*</span> <span class="fl">0.08</span>, xmax <span class="op">+</span> (xmax <span class="op">-</span> xmin) <span class="op">*</span> <span class="fl">0.08</span>, zmin <span class="op">-</span> (zmax <span class="op">-</span> zmin) <span class="op">*</span> <span class="fl">0.08</span>,</span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a>              zmax <span class="op">+</span> (zmax <span class="op">-</span> zmin) <span class="op">*</span> <span class="fl">0.08</span>])</span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a>    ax2.set_xlabel(<span class="st">'x'</span>)</span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylabel(<span class="st">'z'</span>)</span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(<span class="ss">f"Second Singular Vectors"</span>)</span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a>    ax3.axis([xmin <span class="op">-</span> (xmax <span class="op">-</span> xmin) <span class="op">*</span> <span class="fl">0.08</span>, xmax <span class="op">+</span> (xmax <span class="op">-</span> xmin) <span class="op">*</span> <span class="fl">0.08</span>, zmin <span class="op">-</span> (zmax <span class="op">-</span> zmin) <span class="op">*</span> <span class="fl">0.08</span>,</span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>              zmax <span class="op">+</span> (zmax <span class="op">-</span> zmin) <span class="op">*</span> <span class="fl">0.08</span>])</span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a>    ax3.set_xlabel(<span class="st">'x'</span>)</span>
+<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a>    ax3.set_ylabel(<span class="st">'z'</span>)</span>
+<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a>    ax3.set_title(<span class="ss">f"Forecast Trajectory"</span>)</span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a>    <span class="co">#plt.savefig('lorenz_xz.png', format='png', dpi=150, bbox_inches='tight')</span></span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 0
+First and Second Singular Values: (1.228448594501129, 0.4513373125491462
+Error from forecast with First SV initial condition error:  0.19141132902862804
+Error from forecast with Second SV initial condition error:  0.07863218015959082
+Predicted Error from TLM:  0.2009193293103853
+Propogated Forecast Error:  0.18872417060474964</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 250
+First and Second Singular Values: (1.1394503929734268, 0.9941714980010311
+Error from forecast with First SV initial condition error:  0.1952090074899054
+Error from forecast with Second SV initial condition error:  0.17261387607015388
+Predicted Error from TLM:  0.0048714295720515095
+Propogated Forecast Error:  0.004141219987058146</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-4.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 500
+First and Second Singular Values: (1.424139752324881, 0.995086732061398
+Error from forecast with First SV initial condition error:  0.24695559804987424
+Error from forecast with Second SV initial condition error:  0.17236267977680328
+Predicted Error from TLM:  0.18383521634116032
+Propogated Forecast Error:  0.18368264283319208</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-6.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 750
+First and Second Singular Values: (1.448990527988891, 0.9810145948053746
+Error from forecast with First SV initial condition error:  0.25176667007541637
+Error from forecast with Second SV initial condition error:  0.16960956885570896
+Predicted Error from TLM:  0.20159958845084266
+Propogated Forecast Error:  0.20192274260383636</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-8.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 1000
+First and Second Singular Values: (1.4849703940755705, 1.0373268437037995
+Error from forecast with First SV initial condition error:  0.2583218336033291
+Error from forecast with Second SV initial condition error:  0.17949634877880935
+Predicted Error from TLM:  0.2139203878074159
+Propogated Forecast Error:  0.21454378450062808</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-10.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 1250
+First and Second Singular Values: (1.432192023727519, 1.1484609190576092
+Error from forecast with First SV initial condition error:  0.24896354352703345
+Error from forecast with Second SV initial condition error:  0.19923901853209283
+Predicted Error from TLM:  0.20777775375881197
+Propogated Forecast Error:  0.20839147151205964</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-12.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 1500
+First and Second Singular Values: (1.342170250121057, 1.1696944017917177
+Error from forecast with First SV initial condition error:  0.2320121449072954
+Error from forecast with Second SV initial condition error:  0.20360533553894575
+Predicted Error from TLM:  0.17429048491620314
+Propogated Forecast Error:  0.174348634935737</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-14.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 1750
+First and Second Singular Values: (1.4311106346016833, 0.9784700677071371
+Error from forecast with First SV initial condition error:  0.247890887649622
+Error from forecast with Second SV initial condition error:  0.1695489710477361
+Predicted Error from TLM:  0.17047381134290004
+Propogated Forecast Error:  0.17000400133725613</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-16.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 2000
+First and Second Singular Values: (1.4478075379473676, 0.936967182483607
+Error from forecast with First SV initial condition error:  0.2515857735274089
+Error from forecast with Second SV initial condition error:  0.1617753720478683
+Predicted Error from TLM:  0.19990546969422926
+Propogated Forecast Error:  0.2002223800216269</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-18.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 2250
+First and Second Singular Values: (1.5086556862321694, 1.0071442976447544
+Error from forecast with First SV initial condition error:  0.26272860871352854
+Error from forecast with Second SV initial condition error:  0.17402529948364467
+Predicted Error from TLM:  0.2204506597155609
+Propogated Forecast Error:  0.22131693059456403</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-20.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 2500
+First and Second Singular Values: (1.5428222725618967, 1.1331808895134858
+Error from forecast with First SV initial condition error:  0.2689480815740679
+Error from forecast with Second SV initial condition error:  0.19639229686388016
+Predicted Error from TLM:  0.23039350027001174
+Propogated Forecast Error:  0.23155954971205375</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-22.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 2750
+First and Second Singular Values: (1.4016668588441896, 1.2097050884982727
+Error from forecast with First SV initial condition error:  0.23915784063889176
+Error from forecast with Second SV initial condition error:  0.20950357334517827
+Predicted Error from TLM:  0.18405883283762142
+Propogated Forecast Error:  0.18529560409800425</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-24.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 3000
+First and Second Singular Values: (1.4875984404652989, 0.9401708964628126
+Error from forecast with First SV initial condition error:  0.2571946720204518
+Error from forecast with Second SV initial condition error:  0.16286363618266944
+Predicted Error from TLM:  0.14388742630012902
+Propogated Forecast Error:  0.14295811334720274</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-26.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 3250
+First and Second Singular Values: (1.45770296893673, 0.8719289528138046
+Error from forecast with First SV initial condition error:  0.253380143044041
+Error from forecast with Second SV initial condition error:  0.15023409953925224
+Predicted Error from TLM:  0.19851642512016546
+Propogated Forecast Error:  0.19884065708554938</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-28.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 3500
+First and Second Singular Values: (1.4980553003465218, 0.9966111982649489
+Error from forecast with First SV initial condition error:  0.26125404995161383
+Error from forecast with Second SV initial condition error:  0.17187266033975965
+Predicted Error from TLM:  0.2225369193130687
+Propogated Forecast Error:  0.22374614986909958</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-30.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 3750
+First and Second Singular Values: (1.7889975809893677, 1.092029301586354
+Error from forecast with First SV initial condition error:  0.3130887950058776
+Error from forecast with Second SV initial condition error:  0.18915331535892727
+Predicted Error from TLM:  0.27296148337732834
+Propogated Forecast Error:  0.2751542767876681</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-32.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 4000
+First and Second Singular Values: (1.9084572682586123, 1.0179457704552273
+Error from forecast with First SV initial condition error:  0.32249778209826496
+Error from forecast with Second SV initial condition error:  0.17591477563090877
+Predicted Error from TLM:  0.2551009329937229
+Propogated Forecast Error:  0.2605178347250656</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-34.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 4250
+First and Second Singular Values: (1.7370714376335255, 0.7995003830439859
+Error from forecast with First SV initial condition error:  0.2999614623762776
+Error from forecast with Second SV initial condition error:  0.13808735476408218
+Predicted Error from TLM:  0.10330747346228375
+Propogated Forecast Error:  0.10277928189065792</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-36.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 4500
+First and Second Singular Values: (1.482515461926413, 0.7893204971216957
+Error from forecast with First SV initial condition error:  0.2579583053288852
+Error from forecast with Second SV initial condition error:  0.1354986983472167
+Predicted Error from TLM:  0.20549324159726512
+Propogated Forecast Error:  0.2060122314499347</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-38.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 4750
+First and Second Singular Values: (1.5244281585382646, 1.0614303288199824
+Error from forecast with First SV initial condition error:  0.26651438370036706
+Error from forecast with Second SV initial condition error:  0.1830050836295799
+Predicted Error from TLM:  0.22092364497150177
+Propogated Forecast Error:  0.2229222613169632</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-40.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 5000
+First and Second Singular Values: (2.714356419158488, 0.9845519399310263
+Error from forecast with First SV initial condition error:  0.4803253229375657
+Error from forecast with Second SV initial condition error:  0.17131556145091117
+Predicted Error from TLM:  0.42001829091622717
+Propogated Forecast Error:  0.4267304195814149</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-42.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 5250
+First and Second Singular Values: (3.75392471172085, 0.5960530238556376
+Error from forecast with First SV initial condition error:  0.6691169213074696
+Error from forecast with Second SV initial condition error:  0.10304917219200839
+Predicted Error from TLM:  0.5413597763445281
+Propogated Forecast Error:  0.5567376283136283</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-44.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 5500
+First and Second Singular Values: (2.003898865289222, 0.5780326795640853
+Error from forecast with First SV initial condition error:  0.3492675632305015
+Error from forecast with Second SV initial condition error:  0.09952149360965397
+Predicted Error from TLM:  0.08502636543284155
+Propogated Forecast Error:  0.0827385284911872</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-46.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 5750
+First and Second Singular Values: (1.6731624788306139, 0.8336981628458902
+Error from forecast with First SV initial condition error:  0.2958314814485263
+Error from forecast with Second SV initial condition error:  0.14616085239877863
+Predicted Error from TLM:  0.20846691123452446
+Propogated Forecast Error:  0.2051941650237077</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-48.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 6000
+First and Second Singular Values: (6.1876838514727845, 0.7743514439066163
+Error from forecast with First SV initial condition error:  1.1121372291639198
+Error from forecast with Second SV initial condition error:  0.13524973346238336
+Predicted Error from TLM:  0.722401065348075
+Propogated Forecast Error:  0.739304321928733</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-50.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 6250
+First and Second Singular Values: (7.5507408969611545, 0.42819895398258523
+Error from forecast with First SV initial condition error:  1.3411991379962596
+Error from forecast with Second SV initial condition error:  0.07397344397663684
+Predicted Error from TLM:  1.0829958915638969
+Propogated Forecast Error:  1.0814876006955487</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-52.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 6500
+First and Second Singular Values: (6.753819559856853, 0.25258771525113854
+Error from forecast with First SV initial condition error:  1.2922422210064317
+Error from forecast with Second SV initial condition error:  0.04453315159509208
+Predicted Error from TLM:  0.40429120014843695
+Propogated Forecast Error:  0.38213745258215376</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-54.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 6750
+First and Second Singular Values: (6.774815816175093, 0.8390327742537173
+Error from forecast with First SV initial condition error:  1.1279623204711637
+Error from forecast with Second SV initial condition error:  0.14321109819196706
+Predicted Error from TLM:  0.7007396748122315
+Propogated Forecast Error:  0.6919184318630982</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-56.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 7000
+First and Second Singular Values: (6.898996519772768, 0.5143525167961486
+Error from forecast with First SV initial condition error:  1.1719770635328375
+Error from forecast with Second SV initial condition error:  0.08895217228370335
+Predicted Error from TLM:  0.9860921922609412
+Propogated Forecast Error:  1.0192621575765906</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-58.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 7250
+First and Second Singular Values: (92.73753952986377, 0.1350298866859837
+Error from forecast with First SV initial condition error:  25.187888764734115
+Error from forecast with Second SV initial condition error:  0.07594989098571663
+Predicted Error from TLM:  15.692848621470802
+Propogated Forecast Error:  10.520789540603468</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-60.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 7500
+First and Second Singular Values: (5.993147689567335, 0.783614725833048
+Error from forecast with First SV initial condition error:  1.0992025429772532
+Error from forecast with Second SV initial condition error:  0.1335155713034691
+Predicted Error from TLM:  0.9492524617316714
+Propogated Forecast Error:  0.9873782411772741</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-62.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 7750
+First and Second Singular Values: (2.670002277610177, 0.3933319882647412
+Error from forecast with First SV initial condition error:  0.4694627186426081
+Error from forecast with Second SV initial condition error:  0.06796860534276068
+Predicted Error from TLM:  0.15741289376089881
+Propogated Forecast Error:  0.15716292724183048</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-64.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 8000
+First and Second Singular Values: (1.7536464638481108, 0.6400681033009227
+Error from forecast with First SV initial condition error:  0.30933282987728067
+Error from forecast with Second SV initial condition error:  0.11125692443137335
+Predicted Error from TLM:  0.14956718793056162
+Propogated Forecast Error:  0.15157101319794172</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-66.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 8250
+First and Second Singular Values: (4.188283114227821, 0.9086644194989427
+Error from forecast with First SV initial condition error:  0.7019663830130588
+Error from forecast with Second SV initial condition error:  0.15717934448392099
+Predicted Error from TLM:  0.7237968686069679
+Propogated Forecast Error:  0.7000092330077166</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-68.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 8500
+First and Second Singular Values: (10.499587298009379, 0.4230211615415259
+Error from forecast with First SV initial condition error:  1.8332628439147662
+Error from forecast with Second SV initial condition error:  0.07334014032680009
+Predicted Error from TLM:  1.3538853174498
+Propogated Forecast Error:  1.3632685808360436</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-70.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 8750
+First and Second Singular Values: (4.696557453617434, 0.3218323600045132
+Error from forecast with First SV initial condition error:  0.8678392612293081
+Error from forecast with Second SV initial condition error:  0.05614988963563848
+Predicted Error from TLM:  0.5394538479347564
+Propogated Forecast Error:  0.5631453689510932</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-72.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 9000
+First and Second Singular Values: (8.871850408812492, 0.5209800266580279
+Error from forecast with First SV initial condition error:  1.6146953099941184
+Error from forecast with Second SV initial condition error:  0.09140838705330526
+Predicted Error from TLM:  0.5835600277250649
+Propogated Forecast Error:  0.6063905068127381</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-74.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 9250
+First and Second Singular Values: (7.983191840634525, 0.6136484094384359
+Error from forecast with First SV initial condition error:  1.4712548730906214
+Error from forecast with Second SV initial condition error:  0.10617128452688214
+Predicted Error from TLM:  0.8936861137599398
+Propogated Forecast Error:  0.870392417363336</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-76.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 9500
+First and Second Singular Values: (9.685721604107563, 0.2134296894551712
+Error from forecast with First SV initial condition error:  1.4552743132683277
+Error from forecast with Second SV initial condition error:  0.037159927412499044
+Predicted Error from TLM:  0.37903406413013907
+Propogated Forecast Error:  0.3682499545785544</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-78.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 9750
+First and Second Singular Values: (3.8910508850417713, 0.9854048246444225
+Error from forecast with First SV initial condition error:  0.6600386306484203
+Error from forecast with Second SV initial condition error:  0.16857762201797813
+Predicted Error from TLM:  0.23926428990184226
+Propogated Forecast Error:  0.2490002147782418</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-80.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 10000
+First and Second Singular Values: (8.987734136184793, 0.4209924488021833
+Error from forecast with First SV initial condition error:  1.5902056990539168
+Error from forecast with Second SV initial condition error:  0.07285795158696082
+Predicted Error from TLM:  1.0897414890703894
+Propogated Forecast Error:  1.0911795456939313</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-82.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 10250
+First and Second Singular Values: (4.732090593204953, 0.30334479831884176
+Error from forecast with First SV initial condition error:  0.8761654113989985
+Error from forecast with Second SV initial condition error:  0.052964405643645754
+Predicted Error from TLM:  0.05994703355945461
+Propogated Forecast Error:  0.06522408304579431</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-84.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 10500
+First and Second Singular Values: (9.711747596461086, 0.5817934732657293
+Error from forecast with First SV initial condition error:  1.5876343237598336
+Error from forecast with Second SV initial condition error:  0.0996479945710984
+Predicted Error from TLM:  1.0809796001288265
+Propogated Forecast Error:  1.0831413114647723</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-86.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 10750
+First and Second Singular Values: (6.825409217775385, 0.6408120380092543
+Error from forecast with First SV initial condition error:  1.1379334630178615
+Error from forecast with Second SV initial condition error:  0.11093695750647689
+Predicted Error from TLM:  1.0372116087213339
+Propogated Forecast Error:  1.090257656957786</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-88.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 11000
+First and Second Singular Values: (7.8283782415228975, 0.21170723583937306
+Error from forecast with First SV initial condition error:  1.5207449353159537
+Error from forecast with Second SV initial condition error:  0.0369983980363457
+Predicted Error from TLM:  1.323949431062534
+Propogated Forecast Error:  1.1813474920238063</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-90.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 11250
+First and Second Singular Values: (5.348084700626555, 0.9205852250298434
+Error from forecast with First SV initial condition error:  0.8970925390938584
+Error from forecast with Second SV initial condition error:  0.15729464403211652
+Predicted Error from TLM:  0.648276971987902
+Propogated Forecast Error:  0.6434406504468259</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-92.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 11500
+First and Second Singular Values: (7.862564289388624, 0.4641566126926464
+Error from forecast with First SV initial condition error:  1.3476054139191385
+Error from forecast with Second SV initial condition error:  0.08004087993216243
+Predicted Error from TLM:  1.1107840732752652
+Propogated Forecast Error:  1.1401294860019202</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-94.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 11750
+First and Second Singular Values: (44.72881223707939, 0.15768619443008586
+Error from forecast with First SV initial condition error:  5.625668244036727
+Error from forecast with Second SV initial condition error:  0.05112607738055001
+Predicted Error from TLM:  7.711564913333264
+Propogated Forecast Error:  11.388319015496068</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-96.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 12000
+First and Second Singular Values: (4.357448335617873, 1.0088485073710436
+Error from forecast with First SV initial condition error:  0.7335748637591382
+Error from forecast with Second SV initial condition error:  0.17857211327690664
+Predicted Error from TLM:  0.44318085826368575
+Propogated Forecast Error:  0.42212156737037293</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-98.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 12250
+First and Second Singular Values: (4.104924194189864, 0.41772374390133693
+Error from forecast with First SV initial condition error:  0.7145221263869772
+Error from forecast with Second SV initial condition error:  0.07210576884075597
+Predicted Error from TLM:  0.16010643170412056
+Propogated Forecast Error:  0.15809212436162245</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-100.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 12500
+First and Second Singular Values: (2.1310721370186876, 0.4974492733229061
+Error from forecast with First SV initial condition error:  0.3634080572052789
+Error from forecast with Second SV initial condition error:  0.08575145469557102
+Predicted Error from TLM:  0.26008459130361916
+Propogated Forecast Error:  0.25623156619576504</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-102.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 12750
+First and Second Singular Values: (7.197807835115761, 0.7254978103527995
+Error from forecast with First SV initial condition error:  1.3094771431050143
+Error from forecast with Second SV initial condition error:  0.12990925878960094
+Predicted Error from TLM:  0.13678372575012182
+Propogated Forecast Error:  0.12833657595283043</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-104.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 13000
+First and Second Singular Values: (8.491322998020287, 0.5644610701267401
+Error from forecast with First SV initial condition error:  1.5573471015978422
+Error from forecast with Second SV initial condition error:  0.09755208761770318
+Predicted Error from TLM:  1.0492973772637242
+Propogated Forecast Error:  1.0238284984174746</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-106.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 13250
+First and Second Singular Values: (18.423935913026806, 0.18125034950405508
+Error from forecast with First SV initial condition error:  2.542333948686364
+Error from forecast with Second SV initial condition error:  0.03257318153980617
+Predicted Error from TLM:  0.6533762396363617
+Propogated Forecast Error:  0.6247690676952503</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-108.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 13500
+First and Second Singular Values: (3.1384213282121842, 1.1967061100649459
+Error from forecast with First SV initial condition error:  0.5369927227063956
+Error from forecast with Second SV initial condition error:  0.20885112762392255
+Predicted Error from TLM:  0.21957748899530527
+Propogated Forecast Error:  0.21522451067221435</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-110.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 13750
+First and Second Singular Values: (6.9977192476478205, 0.41619876596797717
+Error from forecast with First SV initial condition error:  1.2187902387011345
+Error from forecast with Second SV initial condition error:  0.07201829456123919
+Predicted Error from TLM:  0.7879542720898549
+Propogated Forecast Error:  0.7935435416708395</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-112.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 14000
+First and Second Singular Values: (2.6093372870971403, 0.4264333160320704
+Error from forecast with First SV initial condition error:  0.4437819739922746
+Error from forecast with Second SV initial condition error:  0.0739578195576316
+Predicted Error from TLM:  0.08609312730840171
+Propogated Forecast Error:  0.08249677955172065</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-114.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 14250
+First and Second Singular Values: (37.50300678395739, 0.2844784353215174
+Error from forecast with First SV initial condition error:  5.823497695083473
+Error from forecast with Second SV initial condition error:  0.08848090020038989
+Predicted Error from TLM:  3.4314011899749755
+Propogated Forecast Error:  3.1324866711406014</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-116.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 14500
+First and Second Singular Values: (5.480362861392807, 0.8415662885386198
+Error from forecast with First SV initial condition error:  1.0813454932066704
+Error from forecast with Second SV initial condition error:  0.14702649416633481
+Predicted Error from TLM:  0.7904244756419773
+Propogated Forecast Error:  0.8763550086400945</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-118.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 14750
+First and Second Singular Values: (2.092964613521433, 0.27107231708526763
+Error from forecast with First SV initial condition error:  0.36981306920472523
+Error from forecast with Second SV initial condition error:  0.04688181974098221
+Predicted Error from TLM:  0.31455692486296694
+Propogated Forecast Error:  0.3196433479123295</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-120.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 15000
+First and Second Singular Values: (4.645999422486862, 0.8345204265855797
+Error from forecast with First SV initial condition error:  0.7725201872248324
+Error from forecast with Second SV initial condition error:  0.14404857526143255
+Predicted Error from TLM:  0.7641623358552677
+Propogated Forecast Error:  0.7381901090573385</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-122.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 15250
+First and Second Singular Values: (11.187596377509486, 0.4505127626987656
+Error from forecast with First SV initial condition error:  1.9289051359064058
+Error from forecast with Second SV initial condition error:  0.07805280245210923
+Predicted Error from TLM:  1.5946877310276386
+Propogated Forecast Error:  1.6309913650106969</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-124.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 15500
+First and Second Singular Values: (14.209296060516202, 0.21447374261152238
+Error from forecast with First SV initial condition error:  2.0059877643834425
+Error from forecast with Second SV initial condition error:  0.038753031737129316
+Predicted Error from TLM:  1.2286771621082753
+Propogated Forecast Error:  1.3721451453752345</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-126.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 15750
+First and Second Singular Values: (2.9852125870177657, 1.0569826625249201
+Error from forecast with First SV initial condition error:  0.5205402086415855
+Error from forecast with Second SV initial condition error:  0.1817833297759182
+Predicted Error from TLM:  0.18355319973388215
+Propogated Forecast Error:  0.18347734651199904</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-128.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 16000
+First and Second Singular Values: (8.401321729973414, 0.42201043867586235
+Error from forecast with First SV initial condition error:  1.4572250345728166
+Error from forecast with Second SV initial condition error:  0.07316623931324621
+Predicted Error from TLM:  1.047016299592812
+Propogated Forecast Error:  1.0582116557313628</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-130.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 16250
+First and Second Singular Values: (2.763837863532901, 0.43697516031134165
+Error from forecast with First SV initial condition error:  0.4732861351382457
+Error from forecast with Second SV initial condition error:  0.07572652347845626
+Predicted Error from TLM:  0.10840193241111623
+Propogated Forecast Error:  0.11266715229984516</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-132.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 16500
+First and Second Singular Values: (61.06765653913117, 0.19998920590924701
+Error from forecast with First SV initial condition error:  9.285694085820408
+Error from forecast with Second SV initial condition error:  0.09253121262298711
+Predicted Error from TLM:  7.2118249206013365
+Propogated Forecast Error:  6.499049679166442</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-134.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 16750
+First and Second Singular Values: (7.772962181235851, 0.6441716350560637
+Error from forecast with First SV initial condition error:  1.6598322988952219
+Error from forecast with Second SV initial condition error:  0.11270456553061543
+Predicted Error from TLM:  1.1223801973671423
+Propogated Forecast Error:  1.3138765812416162</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-136.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 17000
+First and Second Singular Values: (1.7499559615156743, 0.2735755392613335
+Error from forecast with First SV initial condition error:  0.30800534089422915
+Error from forecast with Second SV initial condition error:  0.0472214281665549
+Predicted Error from TLM:  0.27829387811103573
+Propogated Forecast Error:  0.28223180397274017</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-138.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 17250
+First and Second Singular Values: (2.7909805219269326, 0.9679785300304766
+Error from forecast with First SV initial condition error:  0.4704694636101239
+Error from forecast with Second SV initial condition error:  0.16680507491144442
+Predicted Error from TLM:  0.4821944973971543
+Propogated Forecast Error:  0.46933016878122885</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-140.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 17500
+First and Second Singular Values: (10.328405768366398, 0.45348207328392964
+Error from forecast with First SV initial condition error:  1.842855286762755
+Error from forecast with Second SV initial condition error:  0.07931790831007537
+Predicted Error from TLM:  1.3366353957851762
+Propogated Forecast Error:  1.309009167365996</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-142.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 17750
+First and Second Singular Values: (3.4973844597747674, 0.4576662919912664
+Error from forecast with First SV initial condition error:  0.6126140339967533
+Error from forecast with Second SV initial condition error:  0.0793246251718561
+Predicted Error from TLM:  0.12105315149406677
+Propogated Forecast Error:  0.12561102732056859</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-144.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 18000
+First and Second Singular Values: (106.70364039258793, 0.1328106761938945
+Error from forecast with First SV initial condition error:  22.024783587616298
+Error from forecast with Second SV initial condition error:  0.10220583086579586
+Predicted Error from TLM:  0.810083807509466
+Propogated Forecast Error:  0.9576140119628739</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-146.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 18250
+First and Second Singular Values: (8.090949305039198, 0.6584912538638393
+Error from forecast with First SV initial condition error:  1.2289131666262707
+Error from forecast with Second SV initial condition error:  0.11348729531871944
+Predicted Error from TLM:  1.0823175772626983
+Propogated Forecast Error:  0.9582447556066416</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-148.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 18500
+First and Second Singular Values: (1.7248912844819937, 0.25534684296247806
+Error from forecast with First SV initial condition error:  0.29895851440271115
+Error from forecast with Second SV initial condition error:  0.044057248522611094
+Predicted Error from TLM:  0.14965427755547678
+Propogated Forecast Error:  0.15075618962728923</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-150.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 18750
+First and Second Singular Values: (1.914463282242474, 1.0290478974463961
+Error from forecast with First SV initial condition error:  0.3358365030960594
+Error from forecast with Second SV initial condition error:  0.17938732899413967
+Predicted Error from TLM:  0.1770440883287117
+Propogated Forecast Error:  0.1800397011340652</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-152.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 19000
+First and Second Singular Values: (7.486672187934157, 0.6020880750486819
+Error from forecast with First SV initial condition error:  1.244341247135714
+Error from forecast with Second SV initial condition error:  0.10506393761660085
+Predicted Error from TLM:  1.0555853925677148
+Propogated Forecast Error:  1.0840611807930585</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-154.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 19250
+First and Second Singular Values: (4.928960900847144, 0.435641594369786
+Error from forecast with First SV initial condition error:  0.8689671924396899
+Error from forecast with Second SV initial condition error:  0.07518460428106372
+Predicted Error from TLM:  0.6986360478232327
+Propogated Forecast Error:  0.703164802042168</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-156.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>INITIAL STEP: 19500
+First and Second Singular Values: (5.710144260865027, 0.2877524205353945
+Error from forecast with First SV initial condition error:  1.0715306392667863
+Error from forecast with Second SV initial condition error:  0.05050136248312651
+Predicted Error from TLM:  0.76495475245021
+Propogated Forecast Error:  0.7102847070508906</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Project_Report_files/figure-html/cell-13-output-158.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
